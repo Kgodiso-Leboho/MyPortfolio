@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme='default'] {
+  --text: #0f172a;
+  --text-h: #0b1020;
+  --bg: #ffffff;
+  --tech-blue: #0ea5e9;
+  --tech-blue-bg: rgba(14, 165, 233, 0.15);
+  --data-purple: #a855f7;
+  --data-purple-bg: rgba(168, 85, 247, 0.15);
+  --data-teal: #14b8a6;
+  --data-teal-bg: rgba(20, 184, 166, 0.15);
+  --border: #e5e7eb;
+  --code-bg: rgba(15, 23, 42, 0.06);
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.12);
+  --accent-border: rgba(170, 59, 255, 0.55);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  /* RGB variables used by Tailwind opacity modifiers */
+  --bg-rgb: 255 255 255;
+  --text-rgb: 15 23 42;
+  --border-rgb: 229 231 235;
+  --code-bg-rgb: 15 23 42;
+  --accent-rgb: 170 59 255;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+/* Ocean theme - Light mode */
+[data-theme='ocean'] {
+  --text: #1a3a52;
+  --text-h: #0f2d42;
+  --bg: #f8fafb;
+  --border: #d4e1eb;
+  --code-bg: rgba(26, 58, 82, 0.06);
+  --accent: #0891b2;
+  --accent-bg: rgba(8, 145, 178, 0.12);
+  --accent-border: rgba(8, 145, 178, 0.55);
+  --social-bg: rgba(236, 244, 249, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --bg-rgb: 248 250 251;
+  --text-rgb: 26 58 82;
+  --border-rgb: 212 225 235;
+  --code-bg-rgb: 26 58 82;
+  --accent-rgb: 8 145 178;
+}
+
+/* Emerald theme - Light mode */
+[data-theme='emerald'] {
+  --text: #0f3a1f;
+  --text-h: #092d17;
+  --bg: #fafbf9;
+  --border: #d1e4d8;
+  --code-bg: rgba(15, 58, 31, 0.06);
+  --accent: #059669;
+  --accent-bg: rgba(5, 150, 105, 0.12);
+  --accent-border: rgba(5, 150, 105, 0.55);
+  --social-bg: rgba(240, 249, 245, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --bg-rgb: 250 251 249;
+  --text-rgb: 15 58 31;
+  --border-rgb: 209 228 216;
+  --code-bg-rgb: 15 58 31;
+  --accent-rgb: 5 150 105;
+}
+
+/* Dark mode - Default theme */
+html.dark,
+html.dark[data-theme='default'] {
+  --text: #e5e7eb;
+  --text-h: #f3f4f6;
+  --bg: #0f0f0f;
+  --tech-blue: #38bdf8;
+  --tech-blue-bg: rgba(56, 189, 248, 0.18);
+  --data-purple: #c084fc;
+  --data-purple-bg: rgba(192, 132, 252, 0.18);
+  --data-teal: #2dd4bf;
+  --data-teal-bg: rgba(45, 212, 191, 0.18);
+  --border: #2b2f3a;
+  --code-bg: rgba(229, 231, 235, 0.08);
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.18);
+  --accent-border: rgba(192, 132, 252, 0.6);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  /* RGB variables used by Tailwind opacity modifiers */
+  --bg-rgb: 15 15 15;
+  --text-rgb: 229 231 235;
+  --border-rgb: 43 47 58;
+  --code-bg-rgb: 229 231 235;
+  --accent-rgb: 192 132 252;
+}
+
+/* Dark mode - Ocean theme */
+html.dark[data-theme='ocean'] {
+  --text: #d1e4f5;
+  --text-h: #ecf6ff;
+  --bg: #0a1628;
+  --border: #1e3a4c;
+  --code-bg: rgba(209, 228, 245, 0.08);
+  --accent: #06b6d4;
+  --accent-bg: rgba(6, 182, 212, 0.18);
+  --accent-border: rgba(6, 182, 212, 0.6);
+  --social-bg: rgba(26, 47, 67, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  --bg-rgb: 10 22 40;
+  --text-rgb: 209 228 245;
+  --border-rgb: 30 58 76;
+  --code-bg-rgb: 209 228 245;
+  --accent-rgb: 6 182 212;
+}
+
+/* Dark mode - Emerald theme */
+html.dark[data-theme='emerald'] {
+  --text: #d1e8d8;
+  --text-h: #ecf5f0;
+  --bg: #0a1f12;
+  --border: #1d3a2a;
+  --code-bg: rgba(209, 232, 216, 0.08);
+  --accent: #10b981;
+  --accent-bg: rgba(16, 185, 129, 0.18);
+  --accent-border: rgba(16, 185, 129, 0.6);
+  --social-bg: rgba(23, 45, 37, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  --bg-rgb: 10 31 18;
+  --text-rgb: 209 232 216;
+  --border-rgb: 29 58 42;
+  --code-bg-rgb: 209 232 216;
+  --accent-rgb: 16 185 129;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
