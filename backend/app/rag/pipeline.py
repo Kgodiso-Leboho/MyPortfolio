@@ -1,44 +1,41 @@
-from langchain_groq import ChatGroq
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain.chains.retrieval_qa.base import RetrievalQA
-from pydantic import SecretStr
-
-from .loader import load_and_index
-
 import os
+from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
 
-def build_pipeline():
+def load_context():
+    data_dir = os.path.join(os.path.dirname(__file__), "..", "data")
+    context = ""
+    for filename in ["about.txt"]:
+        filepath = os.path.join(data_dir, filename)
+        if os.path.exists(filepath):
+            with open(filepath, "r", encoding="utf-8") as f:
+                context += f"\n\n--- {filename} ---\n{f.read()}"
+    return context.strip()
 
-    # Vector DB
-    vectorstore = load_and_index()
+CONTEXT = load_context()
 
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-
-    # Inside your build_pipeline function
-    api_key_val = os.getenv("GROQ_API_KEY")
-    if not api_key_val:
-        raise ValueError("GROQ_API_KEY not found in environment variables")
-
-    llm = ChatGroq(
-        api_key=SecretStr(api_key_val),
+def ask(question: str) -> str:
+    response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
-        temperature=0.2
+        temperature=0.2,
+        messages=[
+            {
+                "role": "system",
+                "content": f"""You are an AI assistant for a developer portfolio website.
+Use ONLY the information below to answer questions. If the answer is not in the context, say you don't have that information.
+When listing multiple items (like degrees, skills, or projects), always present each one on its own line clearly separated.
+Keep answers concise but complete.
+
+{CONTEXT}"""
+            },
+            {
+                "role": "user",
+                "content": question
+            }
+        ]
     )
-
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        retriever=retriever
-    )
-
-    return qa_chain
-
-
-qa_chain = build_pipeline()
-
-def ask(question: str):
-    return qa_chain.run(question)
+    return (response.choices[0].message.content or "").strip()

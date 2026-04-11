@@ -1,0 +1,92 @@
+Austin
+AI and Software Engineer
+
+EDUCATION
+
+MSc in Computer Science (Completing 2027)
+    Course work: Full Dissertation
+    University: North West University
+BSc Honours in Computer Science (Completed 2025)
+    Course work: ML, Advanced Data Structures and Algorithms, Advanced Networks, Advanced Databases, Operating Systems, Research Project
+    GPA: 79
+    University: North West University
+BSc with Computer Science and Mathematics (Completed 2024)
+    Course work: AI, Data Structures and Algorithms, Software Engineering, etc, Calculus, Algebra, Real Analysis, Complex Analysis, Algebraic Structures, Differential Equations, Mathematical Modeling, Applied Mathematics
+    GPA: 73.77
+    University: North West University
+
+SKILLS
+
+Frontend: JavaScript, React, CSS, TailwindCSS (responsive design, component-based architecture, modern UI development)
+Backend: Node.js, Express, FastAPI (RESTful APIs, authentication, scalable backend systems)
+Programming & Software Engineering: Java, Spring Boot, Object-Oriented Programming (OOP), Data Structures & Algorithms (DSA)
+Machine Learning & AI: PyTorch, TensorFlow, Hugging Face, NumPy, Pandas, LangChain
+Core Competencies: API integration, system design, debugging, data processing, model deployment fundamentals
+
+EXPERIENCE
+
+Supplementary Instructor – Data Structures & Algorithms
+
+Facilitated structured learning sessions covering recursion, sorting algorithms, trees, graphs, and dynamic programming
+Mentored students in problem-solving techniques and efficient algorithm design
+Explained time and space complexity with practical coding examples
+Assisted students in transitioning from theoretical understanding to implementation
+Contributed to improved student performance and deeper conceptual clarity
+
+Student Assistant – Applied Mathematics
+
+Supported modules in calculus, linear algebra, and discrete mathematics
+Guided students in applying mathematical concepts to computing and algorithmic problems
+Assisted with grading, tutorials, and one-on-one academic consultations
+Strengthened students’ analytical reasoning and quantitative problem-solving skills
+
+PROJECTS
+
+Depression Detection Model
+
+Designed and implemented a hybrid deep learning model combining SBERT (Sentence-BERT) and BiLSTM architectures
+Built using PyTorch and Hugging Face for natural language understanding tasks
+Focused on detecting linguistic markers associated with self-harm and depressive behavior in text data
+Performed text preprocessing, embedding generation, and sequential modeling
+Evaluated model performance using standard NLP metrics (accuracy, precision, recall, F1-score)
+Compared hybrid model performance against baseline models (SBERT-only and BiLSTM-only)
+
+Scientific Research Assistant (AI System)
+
+Developed an AI-powered assistant for summarizing and analyzing research papers
+Implemented NLP pipelines for text extraction, summarization, and semantic understanding
+Utilized retrieval-based techniques (e.g., embeddings, similarity search) for relevant document querying
+Designed backend services using FastAPI for easy interaction and deployment
+Focused on improving research efficiency through automated insight extraction
+
+RESEARCH
+
+Title:
+A Multi-Aspect Deep Learning Model for Analyzing Linguistic Markers of Self-Harm in Social Media
+
+Overview:
+
+Research focuses on detecting self-harm indicators through advanced natural language processing techniques
+Combines multiple linguistic features (semantic, syntactic, and contextual) into a unified deep learning framework
+
+Key Focus Areas:
+
+Linguistic pattern analysis in social media text
+Mental health detection using machine learning
+Multi-model architectures for improved classification performance
+Explainable AI (XAI) for interpreting model predictions and ensuring transparency
+Ethical considerations in AI for mental health (bias, privacy, responsible use)
+
+Technical Approach:
+
+Integration of transformer-based embeddings (e.g., SBERT) with sequential models (e.g., BiLSTM)
+Feature engineering for capturing emotional tone, sentiment, and contextual cues
+Model evaluation using robust validation techniques and performance metrics
+Exploration of explainability techniques (e.g., attention mechanisms, SHAP, LIME)
+
+INTERESTS / FOCUS
+
+AI for mental health and social impact
+Full-stack development with AI integration
+Explainable and trustworthy machine learning systems
+Building intelligent developer tools and research assistants
