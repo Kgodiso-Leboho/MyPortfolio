@@ -26,7 +26,7 @@ export function AIChatbot({ open, onClose }: { open: boolean; onClose: () => voi
     setIsThinking(true)
 
     try {
-      const res = await fetch('myportfolio-production-0bd1.up.railway.app', {
+      const res = await fetch('https://myportfolio-production-0bd1.up.railway.app/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
