@@ -6,24 +6,6 @@ const initialMessages: Message[] = [
   { id: 1, role: 'ai', text: 'Hi! I’m your AI assistant. Ask me about the portfolio, projects, or my technical strengths.' },
 ]
 
-function getAiReply(userText: string) {
-  const normalized = userText.toLowerCase().trim()
-  if (!normalized) return 'Could you clarify your question?' 
-  if (normalized.includes('project')) {
-    return 'I maintain several projects including web UIs and ML pipelines. Try the Projects page for details.'
-  }
-  if (normalized.includes('tech') || normalized.includes('stack')) {
-    return 'I prioritize TypeScript, React, Tailwind CSS, Node.js, Python, and ML workflow tools like MLflow.'
-  }
-  if (normalized.includes('contact') || normalized.includes('email')) {
-    return 'Use the Email CTA in the hero or the Contact page to reach out quickly.'
-  }
-  if (normalized.includes('ai') || normalized.includes('ml')) {
-    return 'I implement AI and ML workflows with reproducible pipelines, evaluation metrics, and production monitoring.'
-  }
-  return "That's interesting — tell me more, or ask for roadmap, projects, or skills."
-}
-
 export function AIChatbot({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [messages, setMessages] = useState<Message[]>(initialMessages)
   const [input, setInput] = useState('')
@@ -43,15 +25,39 @@ export function AIChatbot({ open, onClose }: { open: boolean; onClose: () => voi
     setInput('')
     setIsThinking(true)
 
-    setTimeout(() => {
+    try {
+      const res = await fetch('http://localhost:8000/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: trimmed }),
+      })
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch AI response')
+      }
+
+      const data = await res.json()
+
       const aiMessage: Message = {
         id: Date.now() + 1,
         role: 'ai',
-        text: getAiReply(trimmed),
+        text: data.response,
       }
+
       setMessages((prev) => [...prev, aiMessage])
+    } catch (error) {
+      const errorMessage: Message = {
+        id: Date.now() + 1,
+        role: 'ai',
+        text: 'Error connecting to AI server.',
+      }
+
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
       setIsThinking(false)
-    }, 700)
+    }
   }
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -63,11 +69,8 @@ export function AIChatbot({ open, onClose }: { open: boolean; onClose: () => voi
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-end bg-black/30 p-4">
-      <div
-        className="absolute inset-0"
-        aria-hidden="true"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0" aria-hidden="true" onClick={onClose} />
+
       <div className="relative w-full max-w-sm rounded-2xl border border-border bg-white p-4 shadow-2xl ring-1 ring-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:ring-slate-700">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-semibold">AI Assistant</h2>
@@ -79,7 +82,10 @@ export function AIChatbot({ open, onClose }: { open: boolean; onClose: () => voi
             ✕
           </button>
         </div>
-        <p className="mt-1 text-xs text-text/70">Ask about the portfolio, projects, and technologies.</p>
+
+        <p className="mt-1 text-xs text-text/70">
+          Ask about the portfolio, projects, and technologies.
+        </p>
 
         <div className="mt-4 max-h-72 overflow-y-auto space-y-2 rounded-xl border border-border bg-white p-3 dark:bg-slate-950">
           {messages.map((message) => (
@@ -109,6 +115,7 @@ export function AIChatbot({ open, onClose }: { open: boolean; onClose: () => voi
             className="flex-1 rounded-lg border border-border bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent dark:bg-slate-800"
             aria-label="Chat input"
           />
+
           <button
             type="submit"
             disabled={!input.trim() || isThinking}
