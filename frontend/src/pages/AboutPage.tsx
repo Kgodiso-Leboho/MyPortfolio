@@ -1,84 +1,157 @@
-import { profile, projects } from '../data/portfolio'
+import { useEffect, useState, useMemo } from 'react'
+import { profile, getProjects } from '../data/portfolio'
+import type { Project } from '../data/portfolio'
 import { Container } from '../components/layout/Container'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { Badge } from '../components/ui/Badge'
 
-function TimelineItem({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="flex gap-3">
-      <div className="mt-1 h-3 w-3 rounded-full bg-accent" aria-hidden="true" />
-      <div>
-        <div className="text-sm font-semibold tracking-tight">{title}</div>
-        <p className="mt-1 text-sm leading-6 text-text/70">{description}</p>
-      </div>
-    </div>
-  )
-}
-
 export function AboutPage() {
-  const focusTech = Array.from(new Set(projects.flatMap((p) => p.tech))).slice(0, 10)
+  const [projects, setProjects] = useState<Project[]>([])
+
+  useEffect(() => {
+    getProjects().then(setProjects)
+  }, [])
+
+  const focusTech = useMemo(() => {
+    return Array.from(new Set(projects.flatMap((p) => p.tech))).slice(0, 12)
+  }, [projects])
 
   return (
-    <div className="py-14 sm:py-20">
+    <div className="py-14 sm:py-20 bg-[var(--bg)] text-[var(--text)]">
       <Container>
         <SectionHeading
-          eyebrow="Story"
-          title="Building products that feel fast, clear, and trustworthy"
-          description="I’m a developer who thinks in systems: UX details matter, but so do data correctness, reproducibility, and engineering clarity."
+          eyebrow="Profile"
+          title="Full Stack Engineer building Intelligent systems and scalable applications"
+          description="A structured view of my work, mindset, and technical focus."
         />
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-2 rounded-2xl border border-border bg-bg/40 p-6 shadow-soft sm:p-8">
-            <h3 className="text-base font-semibold tracking-tight">A quick professional overview</h3>
-            <p className="mt-3 text-sm leading-7 text-text/70">
-              {profile.name} focuses on shipping modern web experiences and data/ML workflows. On the front end, I build
-              accessible, responsive UI that helps users understand complex systems. On the data side, I prioritize
-              validation, evaluation, and observability so insights remain reliable as requirements evolve.
-            </p>
+        {/* ───────── LAYOUT ───────── */}
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
 
-            <div className="mt-6 rounded-2xl border border-border bg-bg/30 p-4">
-              <div className="text-xs font-semibold tracking-wider text-text/60">What drives my work</div>
-              <div className="mt-4 space-y-4">
-                <TimelineItem
-                  title="UX clarity"
-                  description="Design decisions are tied to user intent and feedback, not just aesthetics."
-                />
-                <TimelineItem
-                  title="Correctness by design"
-                  description="Validation, tests, and observability reduce uncertainty and operational risk."
-                />
-                <TimelineItem
-                  title="Reproducible workflows"
-                  description="Experiments are easier to compare and iterate when runs are trackable."
-                />
+          {/* ───────── LEFT: Sticky identity card ───────── */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-20 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/40 p-6 shadow-sm">
+
+              <div className="text-sm font-semibold text-[var(--text-h)]">
+                {profile.name}
+              </div>
+
+              <div className="mt-1 text-xs font-mono text-[var(--text)]/60">
+                Software Engineer • AI Systems Builder
+              </div>
+
+              <div className="mt-5 rounded-xl bg-[var(--accent-bg)] border border-[var(--accent-border)] p-3">
+                <div className="text-xs font-semibold text-[var(--accent)]">
+                  Focus
+                </div>
+                <p className="mt-1 text-sm text-[var(--text)]/80">
+                  AI, Full-stack systems, ML pipelines, scalable web apps
+                </p>
+              </div>
+
+              <div className="mt-5">
+                <div className="text-xs font-semibold text-[var(--text)]/60">
+                  Core traits
+                </div>
+                <ul className="mt-2 space-y-2 text-sm text-[var(--text)]/80">
+                  <li>• Systems thinking</li>
+                  <li>• Clean architecture</li>
+                  <li>• Research-driven engineering</li>
+                  <li>• Product-first mindset</li>
+                </ul>
               </div>
             </div>
           </div>
 
-          <aside className="rounded-2xl border border-border bg-bg/40 p-6 shadow-soft sm:p-8">
-            <h3 className="text-base font-semibold tracking-tight">Focus areas</h3>
-            <p className="mt-3 text-sm leading-6 text-text/70">
-              Technologies I reach for when building clean interfaces and dependable data/ML systems.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {focusTech.map((t) => (
-                <Badge key={t}>{t}</Badge>
-              ))}
+          {/* ───────── RIGHT: Content cards ───────── */}
+          <div className="lg:col-span-2 space-y-6">
+
+            {/* Card 1 */}
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg)]/40 p-6 shadow-sm">
+              <h3 className="text-base font-semibold text-[var(--text-h)]">
+                What I build
+              </h3>
+
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-[var(--border)] bg-[var(--bg)]/30 p-4">
+                  <div className="text-sm font-semibold text-[var(--accent)]">
+                    AI Systems
+                  </div>
+                  <p className="mt-2 text-sm text-[var(--text)]/70">
+                    NLP models, classification systems, and hybrid ML architectures.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-[var(--border)] bg-[var(--bg)]/30 p-4">
+                  <div className="text-sm font-semibold text-[var(--accent)]">
+                    Full-stack Apps
+                  </div>
+                  <p className="mt-2 text-sm text-[var(--text)]/70">
+                    MERN applications with scalable backend logic and clean UI.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-[var(--border)] bg-[var(--bg)]/30 p-4">
+                  <div className="text-sm font-semibold text-[var(--accent)]">
+                    Data Pipelines
+                  </div>
+                  <p className="mt-2 text-sm text-[var(--text)]/70">
+                    Structured ML workflows with evaluation and reproducibility.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-[var(--border)] bg-[var(--bg)]/30 p-4">
+                  <div className="text-sm font-semibold text-[var(--accent)]">
+                    Experimental Systems
+                  </div>
+                  <p className="mt-2 text-sm text-[var(--text)]/70">
+                    Research prototypes that bridge theory and production systems.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-7 rounded-2xl border border-border bg-bg/30 p-4">
-              <div className="text-xs font-semibold tracking-wider text-text/60">Principles</div>
-              <ul className="mt-3 space-y-2 text-sm text-text/80">
-                <li>Typed, modular components</li>
-                <li>Meaningful loading and empty states</li>
-                <li>Performance and accessibility as defaults</li>
-                <li>Clear handoffs between data and UI</li>
-              </ul>
+            {/* Card 2 */}
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg)]/40 p-6 shadow-sm">
+              <h3 className="text-base font-semibold text-[var(--text-h)]">
+                Engineering mindset
+              </h3>
+
+              <div className="mt-4 space-y-3 text-sm text-[var(--text)]/80">
+                <p>• I design systems before writing code</p>
+                <p>• I prioritise clarity and maintainability over complexity</p>
+                <p>• I treat features as parts of a larger system</p>
+                <p>• I optimise for correctness, not just functionality</p>
+              </div>
             </div>
-          </aside>
+
+            {/* Card 3 */}
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg)]/40 p-6 shadow-sm">
+              <h3 className="text-base font-semibold text-[var(--text-h)]">
+                Technical stack
+              </h3>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {focusTech.map((t) => (
+                  <Badge key={t}>{t}</Badge>
+                ))}
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--accent-bg)] p-6">
+              <h3 className="text-base font-semibold text-[var(--accent)]">
+                Professional identity
+              </h3>
+
+              <p className="mt-2 text-sm text-[var(--text)]/80">
+                Software Engineer • AI Developer • Full-stack Engineer • ML Systems Builder
+              </p>
+            </div>
+
+          </div>
         </div>
       </Container>
     </div>
   )
 }
-

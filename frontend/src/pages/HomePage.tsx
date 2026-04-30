@@ -1,4 +1,6 @@
-import { profile, projects } from '../data/portfolio'
+import { useEffect, useState } from 'react'
+import { profile, getProjects } from '../data/portfolio'
+import type { Project } from '../data/portfolio'
 import { Container } from '../components/layout/Container'
 
 // ─── Tag colour map ───────────────────────────────────────────────────────────
@@ -9,8 +11,8 @@ const TAG_COLORS: Record<string, string> = {
   CSS:                'border-[var(--border)] text-[var(--tech-blue)] bg-[var(--tech-blue-bg)]',
   NLP:                'border-[var(--border)] text-[var(--data-purple)] bg-[var(--data-purple-bg)]',
   SBERT:              'border-[var(--border)] text-[var(--data-purple)] bg-[var(--data-purple-bg)]',
-  'Machine Learning': 'border-[var(--border)] text-[var(--data-purple)] bg-[var(--data-purple-bg)]',
-  'Jupyter Notebook': 'border-[var(--border)] text-[var(--data-purple)] bg-[var(--data-purple-bg)]',
+  "Machine Learning": 'border-[var(--border)] text-[var(--data-purple)] bg-[var(--data-purple-bg)]',
+  "Jupyter Notebook": 'border-[var(--border)] text-[var(--data-purple)] bg-[var(--data-purple-bg)]',
 }
 const DEFAULT_TAG = 'border-[var(--border)] text-[var(--text)]/50 bg-[var(--code-bg)]'
 
@@ -19,66 +21,29 @@ const DEFAULT_TAG = 'border-[var(--border)] text-[var(--text)]/50 bg-[var(--code
 const TICKER_ITEMS = [
   { val: `${6}+`,  label: 'Projects shipped'     },
   { val: '15+',    label: 'Technologies'          },
-  { val: 'UX—',    label: 'Front-end approach', amber: true },
+  { val: 'UX',    label: 'Front-end approach', amber: true },
   { val: 'A11Y',   label: 'Accessibility first'   },
   { val: '0px',    label: 'Technical debt goal'   },
   { val: '∞',      label: 'Reproducible workflows'},
 ]
 
-// ─── Bento icon SVGs ──────────────────────────────────────────────────────────
-
-function IconMonitor() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-[var(--accent)] fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="3" width="20" height="14" rx="2"/>
-      <path d="M8 21h8M12 17v4"/>
-    </svg>
-  )
-}
-function IconLayers() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-[var(--accent)] fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-      <path d="M2 17l10 5 10-5"/>
-      <path d="M2 12l10 5 10-5"/>
-    </svg>
-  )
-}
-function IconBox() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-[var(--accent)] fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-      <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
-    </svg>
-  )
-}
-function IconSun() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-[var(--accent)] fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="3"/>
-      <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
-    </svg>
-  )
-}
-function IconActivity() {
-  return (
-    <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-[var(--accent)] fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-    </svg>
-  )
-}
-
-function BentoIcon({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="w-9 h-9 rounded-lg border border-[var(--border)] bg-[var(--code-bg)] flex items-center justify-center flex-shrink-0">
-      {children}
-    </div>
-  )
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export function HomePage() {
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    let mounted = true
+
+    getProjects().then((data) => {
+      if (mounted) setProjects(data)
+    })
+
+    return () => {
+      mounted = false
+    }
+  }, [])
+
   const techHighlights = Array.from(
     new Set(
       projects
@@ -258,12 +223,6 @@ export function HomePage() {
                 ))}
               </div>
             </div>
-
-            {/* ── Section label ── */}
-            <div className="font-mono text-[10px] uppercase tracking-widest text-[#4a4846] mb-5">
-              What I bring to the table
-            </div>
-
           </div>
         </Container>
       </div>

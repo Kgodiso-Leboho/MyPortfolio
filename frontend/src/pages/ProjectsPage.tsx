@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
-import { projects } from '../data/portfolio'
+import { useEffect, useMemo, useState } from 'react'
+import { getProjects } from '../data/portfolio'
+import type { Project } from '../data/portfolio'
 import { Container } from '../components/layout/Container'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { ProjectCard } from '../components/projects/ProjectCard'
@@ -27,6 +28,7 @@ function SearchIcon({ className }: { className?: string }) {
 export function ProjectsPage() {
   const [query, setQuery] = useState('')
   const [selectedTech, setSelectedTech] = useState<string | null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
 
   const techTags = useMemo(() => {
     const tags = new Set<string>()
@@ -47,6 +49,10 @@ export function ProjectsPage() {
       return matchesQuery && matchesTech
     })
   }, [query, selectedTech])
+
+  useEffect(() => {
+    getProjects().then(setProjects)
+  }, [])
 
   return (
     <div className="py-14 sm:py-20">

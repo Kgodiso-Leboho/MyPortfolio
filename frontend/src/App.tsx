@@ -7,17 +7,19 @@ import { AboutPage } from './pages/AboutPage'
 import { ContactPage } from './pages/ContactPage'
 import { CVPage } from './pages/CVPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { EducationPage } from './pages/EducationPage'
 
 export default function App() {
   return (
     <Routes>
       <Route element={<AppLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/skills" element={<SkillsPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/education" element={<EducationPage />} />
+        <Route path="/skills" element={<SkillsPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/cv" element={<CVPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
