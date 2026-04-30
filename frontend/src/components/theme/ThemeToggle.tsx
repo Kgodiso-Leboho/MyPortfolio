@@ -26,18 +26,6 @@ function MoonIcon({ className }: { className?: string }) {
   )
 }
 
-function PaletteIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <circle cx="13" cy="13" r="8" />
-      <path d="M5 9a2 2 0 1 0 4 0 2 2 0 0 0-4 0" />
-      <path d="M15 5a2 2 0 1 0 4 0 2 2 0 0 0-4 0" />
-      <path d="M15 19a2 2 0 1 0 4 0 2 2 0 0 0-4 0" />
-      <path d="M5 19a2 2 0 1 0 4 0 2 2 0 0 0-4 0" />
-    </svg>
-  )
-}
-
 export function ThemeToggle({ className }: { className?: string }) {
   const { mode, variant, toggleMode, setVariant } = useTheme()
   const [showMenu, setShowMenu] = useState(false)
@@ -80,18 +68,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       </button>
 
       <div className="relative">
-        <button
-          type="button"
-          onClick={() => setShowMenu(!showMenu)}
-          aria-label="Toggle theme selector"
-          aria-expanded={showMenu}
-          aria-haspopup="menu"
-          className={cn(
-            'inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-bg/40 text-text transition-colors hover:bg-accent-bg/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
-          )}
-        >
-          <PaletteIcon className="h-5 w-5" />
-        </button>
+        
 
         {showMenu && (
           <div

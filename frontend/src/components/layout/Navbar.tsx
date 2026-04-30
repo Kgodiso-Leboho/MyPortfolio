@@ -48,8 +48,8 @@ export function Navbar() {
         cn(
           'font-mono text-[11px] uppercase tracking-widest px-3 py-1.5 rounded transition-colors no-underline',
           isActive
-            ? 'text-[#c8a87a] bg-[#1e1a14]'
-            : 'text-[#6b6968] hover:text-[#e8e6e0] hover:bg-[#151413]',
+            ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
+            : 'text-[var(--text)]/60 hover:text-[var(--text)] hover:bg-[var(--code-bg)]',
         ),
     [],
   )
@@ -62,25 +62,23 @@ export function Navbar() {
     .toUpperCase()
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#1c1b1a] bg-[#0c0c0e]/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur">
       <Container className="flex h-14 items-center justify-between gap-4">
 
         {/* Logo */}
         <NavLink
           to="/"
           className="group inline-flex items-center gap-2.5 no-underline"
-          aria-label={`${profile.name} home`}
         >
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#1e1c1a] border border-[#2a2928] text-[#c8a87a] font-extrabold text-xs transition-colors group-hover:border-[#3f3d3a]">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--code-bg)] border border-[var(--border)] text-[var(--accent)] font-extrabold text-xs transition-colors">
             {initials}
           </span>
-          <span className="font-mono text-[13px] text-[#6b6968] group-hover:text-[#e8e6e0] transition-colors hidden sm:block">
-            <span className="text-[#c8a87a]">//</span> {profile.name.toLowerCase().replace(' ', '.')}
-          </span>
+
+          
         </NavLink>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {
             const isAnchor = item.to.startsWith('#')
             return isAnchor ? (
@@ -95,24 +93,23 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Right side actions */}
+        {/* Right side */}
         <div className="flex items-center gap-2">
           <div className="hidden sm:flex items-center gap-1.5">
             <a
-              aria-label="GitHub"
               href={profile.githubUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[#1c1b1a] bg-[#0e0e10] text-[#6b6968] hover:border-[#2a2928] hover:text-[#e8e6e0] transition-colors"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--code-bg)] text-[var(--text)]/60 hover:text-[var(--text)] transition-colors"
             >
               <GitHubIcon />
             </a>
+
             <a
-              aria-label="LinkedIn"
               href={profile.linkedinUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[#1c1b1a] bg-[#0e0e10] text-[#6b6968] hover:border-[#2a2928] hover:text-[#e8e6e0] transition-colors"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--code-bg)] text-[var(--text)]/60 hover:text-[var(--text)] transition-colors"
             >
               <LinkedInIcon />
             </a>
@@ -120,13 +117,10 @@ export function Navbar() {
 
           <ThemeToggle />
 
-          {/* Mobile hamburger */}
+          {/* Mobile button */}
           <button
             type="button"
-            className="inline-flex md:hidden h-8 w-8 items-center justify-center rounded-lg border border-[#1c1b1a] bg-[#0e0e10] text-[#6b6968] hover:border-[#2a2928] hover:text-[#e8e6e0] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#c8a87a]"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
+            className="inline-flex md:hidden h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--code-bg)] text-[var(--text)]/60 hover:text-[var(--text)] transition-colors"
             onClick={() => setOpen((v) => !v)}
           >
             <HamburgerIcon open={open} />
@@ -136,14 +130,13 @@ export function Navbar() {
 
       {/* Mobile menu */}
       <div
-        id="mobile-menu"
         className={cn(
-          'md:hidden overflow-hidden border-t border-[#1c1b1a] bg-[#0c0c0e]/98 transition-all duration-200',
+          'md:hidden overflow-hidden border-t border-[var(--border)] bg-[var(--bg)] transition-all duration-200',
           open ? 'max-h-96' : 'max-h-0',
         )}
       >
         <Container className="py-3">
-          <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
+          <nav className="flex flex-col gap-1">
             {navItems.map((item) => {
               const isAnchor = item.to.startsWith('#')
               return isAnchor ? (
@@ -151,39 +144,31 @@ export function Navbar() {
                   key={item.to}
                   href={item.to}
                   className={navClassName({ isActive: false })}
-                  onClick={() => setOpen(false)}
                 >
                   {item.label}
                 </a>
               ) : (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  className={navClassName}
-                  onClick={() => setOpen(false)}
-                >
+                <NavLink key={item.to} to={item.to} className={navClassName}>
                   {item.label}
                 </NavLink>
               )
             })}
 
-            {/* Social links in mobile menu */}
-            <div className="mt-3 pt-3 border-t border-[#1c1b1a] flex gap-2">
+            <div className="mt-3 pt-3 border-t border-[var(--border)] flex gap-2">
               <a
-                aria-label="GitHub"
                 href={profile.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[#1c1b1a] bg-[#0e0e10] text-[#6b6968] hover:text-[#e8e6e0] transition-colors"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--code-bg)] text-[var(--text)]/60 hover:text-[var(--text)]"
               >
                 <GitHubIcon />
               </a>
+
               <a
-                aria-label="LinkedIn"
                 href={profile.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[#1c1b1a] bg-[#0e0e10] text-[#6b6968] hover:text-[#e8e6e0] transition-colors"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--code-bg)] text-[var(--text)]/60 hover:text-[var(--text)]"
               >
                 <LinkedInIcon />
               </a>

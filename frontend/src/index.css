@@ -3,34 +3,33 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
-/* ─── Base / Default theme (dark terminal) ─────────────────────────────────── */
+/* ─── Light Theme (Default) ─────────────────────────────────────────────── */
 
-:root,
-[data-theme='default'] {
-  --text:           #e8e6e0;
-  --text-h:         #f0ede6;
-  --bg:             #0c0c0e;
+:root {
+  --text:           #1a1a1a;
+  --text-h:         #0c0c0e;
+  --bg:             #ffffff;
 
-  --tech-blue:      #4a8bc4;
-  --tech-blue-bg:   rgba(74, 139, 196, 0.12);
-  --data-purple:    #9a6ec8;
-  --data-purple-bg: rgba(154, 110, 200, 0.12);
-  --data-teal:      #4a8a5a;
-  --data-teal-bg:   rgba(74, 138, 90, 0.12);
+  --tech-blue:      #3b82f6;
+  --tech-blue-bg:   rgba(59, 130, 246, 0.10);
+  --data-purple:    #8b5cf6;
+  --data-purple-bg: rgba(139, 92, 246, 0.10);
+  --data-teal:      #10b981;
+  --data-teal-bg:   rgba(16, 185, 129, 0.10);
 
-  --border:         #1c1b1a;
-  --code-bg:        rgba(200, 168, 122, 0.08);
+  --border:         #e5e7eb;
+  --code-bg:        rgba(0, 0, 0, 0.05);
   --accent:         #c8a87a;
   --accent-bg:      rgba(200, 168, 122, 0.10);
   --accent-border:  rgba(200, 168, 122, 0.40);
-  --social-bg:      rgba(20, 20, 20, 0.60);
-  --shadow:         rgba(0,0,0,0.5) 0 10px 15px -3px,
-                    rgba(0,0,0,0.30) 0 4px 6px -2px;
+  --social-bg:      rgba(0, 0, 0, 0.04);
+  --shadow:         rgba(0,0,0,0.08) 0 10px 15px -3px,
+                    rgba(0,0,0,0.04) 0 4px 6px -2px;
 
-  --bg-rgb:         12 12 14;
-  --text-rgb:       232 230 224;
-  --border-rgb:     28 27 26;
-  --code-bg-rgb:    200 168 122;
+  --bg-rgb:         255 255 255;
+  --text-rgb:       26 26 26;
+  --border-rgb:     229 231 235;
+  --code-bg-rgb:    0 0 0;
   --accent-rgb:     200 168 122;
 
   --sans:           'Syne', system-ui, sans-serif;
@@ -39,134 +38,43 @@
 
   font: 18px/1.6 var(--sans);
   letter-spacing: 0.01px;
-  color-scheme: dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-/* ─── Slate theme (cooler, blue-tinted dark) ───────────────────────────────── */
+/* ─── Dark Theme ────────────────────────────────────────────────────────── */
 
-[data-theme='ocean'] {
-  --text:           #dce6f0;
-  --text-h:         #edf3f9;
-  --bg:             #0a0f18;
-
-  --tech-blue:      #5a9fd4;
-  --tech-blue-bg:   rgba(90, 159, 212, 0.12);
-  --data-purple:    #8a7ec8;
-  --data-purple-bg: rgba(138, 126, 200, 0.12);
-  --data-teal:      #4a8a7a;
-  --data-teal-bg:   rgba(74, 138, 122, 0.12);
-
-  --border:         #161d28;
-  --code-bg:        rgba(90, 159, 212, 0.08);
-  --accent:         #7ab8d4;
-  --accent-bg:      rgba(122, 184, 212, 0.10);
-  --accent-border:  rgba(122, 184, 212, 0.40);
-  --social-bg:      rgba(14, 22, 36, 0.60);
-  --shadow:         rgba(0,0,0,0.5) 0 10px 15px -3px,
-                    rgba(0,0,0,0.30) 0 4px 6px -2px;
-
-  --bg-rgb:         10 15 24;
-  --text-rgb:       220 230 240;
-  --border-rgb:     22 29 40;
-  --code-bg-rgb:    90 159 212;
-  --accent-rgb:     122 184 212;
-}
-
-/* ─── Moss theme (warm green-tinted dark) ──────────────────────────────────── */
-
-[data-theme='emerald'] {
-  --text:           #d8e6d8;
-  --text-h:         #ecf5ec;
-  --bg:             #090f0a;
-
-  --tech-blue:      #4a9a7a;
-  --tech-blue-bg:   rgba(74, 154, 122, 0.12);
-  --data-purple:    #8a9a5a;
-  --data-purple-bg: rgba(138, 154, 90, 0.12);
-  --data-teal:      #5aaa6a;
-  --data-teal-bg:   rgba(90, 170, 106, 0.12);
-
-  --border:         #141a14;
-  --code-bg:        rgba(90, 170, 106, 0.08);
-  --accent:         #8ac87a;
-  --accent-bg:      rgba(138, 200, 122, 0.10);
-  --accent-border:  rgba(138, 200, 122, 0.40);
-  --social-bg:      rgba(14, 24, 14, 0.60);
-  --shadow:         rgba(0,0,0,0.5) 0 10px 15px -3px,
-                    rgba(0,0,0,0.30) 0 4px 6px -2px;
-
-  --bg-rgb:         9 15 10;
-  --text-rgb:       216 230 216;
-  --border-rgb:     20 26 20;
-  --code-bg-rgb:    90 170 106;
-  --accent-rgb:     138 200 122;
-}
-
-/* ─── Dark mode overrides (all themes are already dark, but kept for compat) ── */
-
-html.dark,
-html.dark[data-theme='default'] {
+html.dark {
   --text:           #e8e6e0;
   --text-h:         #f0ede6;
   --bg:             #0c0c0e;
+
   --border:         #1c1b1a;
   --code-bg:        rgba(200, 168, 122, 0.08);
   --accent:         #c8a87a;
   --accent-bg:      rgba(200, 168, 122, 0.10);
   --accent-border:  rgba(200, 168, 122, 0.40);
   --social-bg:      rgba(20, 20, 20, 0.60);
+
   --bg-rgb:         12 12 14;
   --text-rgb:       232 230 224;
   --border-rgb:     28 27 26;
   --code-bg-rgb:    200 168 122;
   --accent-rgb:     200 168 122;
+
+  color-scheme: dark;
 }
 
-html.dark[data-theme='ocean'] {
-  --text:           #dce6f0;
-  --text-h:         #edf3f9;
-  --bg:             #0a0f18;
-  --border:         #161d28;
-  --code-bg:        rgba(90, 159, 212, 0.08);
-  --accent:         #7ab8d4;
-  --accent-bg:      rgba(122, 184, 212, 0.10);
-  --accent-border:  rgba(122, 184, 212, 0.40);
-  --social-bg:      rgba(14, 22, 36, 0.60);
-  --bg-rgb:         10 15 24;
-  --text-rgb:       220 230 240;
-  --border-rgb:     22 29 40;
-  --code-bg-rgb:    90 159 212;
-  --accent-rgb:     122 184 212;
+/* ─── Responsive Font ───────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
 }
 
-html.dark[data-theme='emerald'] {
-  --text:           #d8e6d8;
-  --text-h:         #ecf5ec;
-  --bg:             #090f0a;
-  --border:         #141a14;
-  --code-bg:        rgba(90, 170, 106, 0.08);
-  --accent:         #8ac87a;
-  --accent-bg:      rgba(138, 200, 122, 0.10);
-  --accent-border:  rgba(138, 200, 122, 0.40);
-  --social-bg:      rgba(14, 24, 14, 0.60);
-  --bg-rgb:         9 15 10;
-  --text-rgb:       216 230 216;
-  --border-rgb:     20 26 20;
-  --code-bg-rgb:    90 170 106;
-  --accent-rgb:     138 200 122;
-}
-
-/* ─── Ticker animation ─────────────────────────────────────────────────────── */
+/* ─── Animations (unchanged) ───────────────────────────────────────────── */
 
 @keyframes ticker-scroll {
   from { transform: translateX(0); }
@@ -181,28 +89,32 @@ html.dark[data-theme='emerald'] {
   animation-play-state: paused;
 }
 
-/* ─── Float utility (kept for any floating elements) ───────────────────────── */
-
 @keyframes float {
-  0%   { transform: translateY(0px);   }
+  0%   { transform: translateY(0px); }
   50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0px);   }
+  100% { transform: translateY(0px); }
 }
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
-/* ─── Dot grid background (used on HomePage) ───────────────────────────────── */
+/* ─── Background Grid ─────────────────────────────────────────────────── */
 
 .bg-dot-grid {
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
-/* ─── Root shell ───────────────────────────────────────────────────────────── */
+html.dark .bg-dot-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+}
+
+/* ─── Layout ─────────────────────────────────────────────────────────── */
 
 #root {
   min-height: 100svh;
