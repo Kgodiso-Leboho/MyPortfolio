@@ -5,7 +5,7 @@ A modern, responsive developer portfolio showcasing my projects, skills, and exp
 ---
 
 ## Live Demo
-(https://my-portfolio-gamma-liard-65.vercel.app/)
+https://my-portfolio-gamma-liard-65.vercel.app/
 
 ---
 
