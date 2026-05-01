@@ -28,15 +28,7 @@ A modern, responsive developer portfolio showcasing my projects, skills, and exp
 
 ---
 
-## 📂 Project Structure
-src/
-components/
-pages/
-assets/
-
----
-
-## 🚀 Getting Started
+## Getting Started
 ```bash
 git clone https://github.com/yourname/portfolio.git
 cd portfolio
