@@ -1,4 +1,4 @@
-# Austin — Developer Portfolio
+# Austin : Developer Portfolio
 
 A modern, responsive developer portfolio showcasing my projects, skills, and experience as a full-stack and AI-focused software engineer.
 
